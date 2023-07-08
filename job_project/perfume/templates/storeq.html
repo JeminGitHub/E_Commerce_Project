@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block style %}
+ {% block links %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+
+  {% endblock %}
+
+<style>
+  .container-store{margin-top: 80px;
+  text-align:center;}
+
+   .price {
+    margin-top: 10px;
+    text-decoration: line-through;
+  }
+.mids{margin-top: 150px;
+ display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: #ffd700;
+
+
+    position: relative;}
+
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-card {
+  animation: fade-in 0.5s ease-in-out;
+}
+
+.card-img-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-img-wrapper:hover .card-overlay {
+  opacity: 1;
+}
+
+.card-overlay a {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.card-img-wrapper:hover .card-overlay a {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+</style>
+{% endblock %}
+{% block content %}
+<hr>
+<div class="mids ">
+  <div class="text text-center ">
+    <h2>Royal Queens Exclusive</h2>
+  </div>
+</div>
+<hr>
+<div class="container-xxl p-4 mx-3">
+  <div class="container-store">
+    <div class="row">
+      <div class="col-md-3 store-filter">
+        <h5><i class="fas fa-filter"></i> Filter</h5>
+        <div class="list-group">
+          <a href="#" class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#brandDropdown">
+            Brand
+            <span class="dropdown-toggle"></span>
+          </a>
+          <div class="collapse" id="brandDropdown">
+            <a class="dropdown-item" href="#">Royal Avenue</a>
+            <a class="dropdown-item" href="#">Arabian Queen</a>
+            <a class="dropdown-item" href="#">Arabian Island</a>
+            <a class="dropdown-item" href="#">Wisdom Queen</a>
+          </div>
+          <a href="#" class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#categoryDropdown">
+            Category
+            <span class="dropdown-toggle"></span>
+          </a>
+          <div class="collapse" id="categoryDropdown">
+           <a class="dropdown-item" href="#">Eau de Parfum</a>
+            <a class="dropdown-item" href="#">Eau de Toilette </a>
+            <a class="dropdown-item" href="#">Eau de Cologne</a>
+            <a class="dropdown-item" href="#">Perfume Extract</a>
+            <a class="dropdown-item" href="#">Eau Fraiche</a>
+          </div>
+          <a href="#" class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#roleDropdown">
+            Role
+            <span class="dropdown-toggle"></span>
+          </a>
+          <div class="collapse" id="roleDropdown">
+            <a class="dropdown-item" href="#">King</a>
+            <a class="dropdown-item" href="#">Queen</a>
+            <a class="dropdown-item" href="#">Prince & Princess</a>
+          </div>
+          <a href="#" class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#priceDropdown">
+            Price
+            <span class="dropdown-toggle"></span>
+          </a>
+          <div class="collapse" id="priceDropdown">
+            <a class="dropdown-item" href="#">Low to High</a>
+            <a class="dropdown-item" href="#">High to Low</a>
+          </div>
+        </div>
+      </div>
+
+
+    <div class="col-md-9 store-products  ">
+      <div class="row ">
+        {% for product in products_q %}
+       <div class="card p-3 mx-3 my-3 animate-card" style="width: 18rem; display:inline-block">
+  <div class="card-img-wrapper">
+    <img src="{{ product.image_q.url }}" class="card-img-top" alt="...">
+    <div class="card-overlay">
+    <a href="#" class="btn btn-light">
+  <h6><i class="fas fa-eye"></i> View</h6>
+</a>
+
+
+    </div>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ product.title_q }}</h5>
+    <p class="offer-price">Off:{{ product.offer_q }}</p>
+    <p class="price">Rs:{{ product.price_og_q}}</p>
+    <p class="offer-price">Rs:{{ product.price_q }}</p>
+   <a href="#" class="btn btn-dark">
+  Add to Cart
+</a>
+<a href="#" class="btn btn-danger">
+  <i class="fas fa-heart "></i>
+</a>
+
+  </div>
+</div>
+
+{% endfor %}
+      </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script src="{% static 'js/storeq.js' %}"></script>
+
+
+
+
+{% endblock %}

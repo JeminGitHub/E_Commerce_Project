@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<script type="text/javascript">
+		var user = '{{request.user}}'
+
+		function getToken(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getToken('csrftoken')
+
+	</script>
+
+
+  {% block links %}
+  {% endblock %}
+{% block style %}
+{% endblock %}
+    <style>
+.nav,.master{background-color:black;
+height:120px;
+width:auto;}
+
+  .layout {
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    margin-top: 10px;
+    border-radius: 25px;
+
+  }
+
+  .navbar-expand-lg {
+    border-radius: 5px;
+  }
+
+  .navbar-brand {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .navbar {
+    background-color: #343a40;
+    transition: all 0.3s;
+  }
+
+  .navbar.zoom {
+    transform: scale(0.95);
+  }
+
+  .fixed-navbar {
+    position: fixed;
+    top: -70px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: #343a40;
+    transition: top 0.3s;
+  }
+
+  .fixed-navbar.show {
+    top: 0;
+  }
+
+.head{background-color: black;
+height:600px;
+width:auto: }
+
+.payment-icons{font-size:30px;}
+
+</style>
+
+
+<body>
+
+<div class="container-fluid nav fixed-top">
+  <div class="container-fluid fixed-top p-4 master">
+    <div class="layout">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">Royal Perfume</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'studio' %}"><i class="fas fa-perfume"></i> Studio</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Store
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'store' %}"><i class="fas fa-crown" style="color: #FFD700"></i> King</a>
+                <a class="dropdown-item" href="{% url 'storeq' %}"><i class="fas fa-gem" style="color: #FFD700"></i> Queen</a>
+                <a class="dropdown-item" href="#"><i class="fas fa-users" style="color: #FFD700"></i> Prince &amp;
+                  Princess</a>
+              </div>
+            </li>
+          </ul>
+          <form class="form-inline">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-outline-light" type="button">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fas fa-search"></i></a>
+            </li>
+            <li class="nav-item">
+    <a class="nav-link" href="{% url 'cart' %}">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-total">{{ cartItems }}</span>
+    </a>
+</li>
+             <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fas fa-heart"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fas fa-user"></i></a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  </div>
+
+</div>
+
+
+
+
+  <script>
+    window.addEventListener("scroll", function () {
+      const navbar = document.querySelector(".navbar");
+
+      if (window.pageYOffset > 100) {
+        navbar.classList.add("fixed-navbar", "show");
+      } else {
+        navbar.classList.remove("fixed-navbar", "show");
+      }
+    });
+
+    const navbar = document.querySelector(".navbar");
+    navbar.addEventListener("mouseenter", function () {
+      navbar.classList.add("zoom");
+    });
+
+    navbar.addEventListener("mouseleave", function () {
+      navbar.classList.remove("zoom");
+    });
+  </script>
+
+  {% block content %}
+
+
+
+  {% endblock %}
+
+<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>-->
+<!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+
+
+<footer class=" head text-center text-lg-start text-muted">
+
+  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+
+    <div class="me-5 d-none d-lg-block">
+      <span>FOLLOW US:</span>
+    </div>
+
+
+
+    <div>
+      <a href="" class="me-4 link-secondary">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="" class="me-4 link-secondary">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="" class="me-4 link-secondary">
+        <i class="fab fa-google"></i>
+      </a>
+      <a href="" class="me-4 link-secondary">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="" class="me-4 link-secondary">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="" class="me-4 link-secondary">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+
+  </section>
+
+  <section class="">
+    <div class="container text-center text-md-start mt-5">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <!-- Content -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            <i class="fas fa-gem me-3 text-secondary"></i> Royal Perfumes
+          </h6>
+          <p>
+            If you’d like to get in touch, Please send us a mail during regular business hours.
+          </p>
+            <p>
+          https://github.com/JeminGitHub</p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            CO BRANDS
+          </h6>
+          <p>
+            <a href="#!" class="text-reset">Royal Avenue</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Arabian Queen</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Arabian Island</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Wisdom Queen</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Useful links
+          </h6>
+          <p>
+            <a href="#!" class="text-reset">Home</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Studio</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Products</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Help</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+          <p><i class="fas fa-home me-3 text-secondary"></i> Quilon, Kerala, India</p>
+          <p>
+            <i class="fas fa-envelope me-3 text-secondary"></i>
+            jeminmthw997@gmail.com
+          </p>
+          <p><i class="fas fa-phone me-3 text-secondary"></i> 91 + 9567 14 1818</p>
+          <p><i class="fas fa-print me-3 text-secondary"></i> + 01 234 567 89</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+    © 2023 Copyright:
+    <a class="text-reset fw-bold" href="https://www.linkedin.com/in/jemin-mathew-584908279/">ROYAL PERFUMES ALL RIGHTS RESERVED</a>
+    <div class="payment-icons my-2">
+      <i class="fab fa-paypal"></i>
+      <i class="fab fa-cc-visa"></i>
+      <i class="fab fa-cc-mastercard"></i>
+      <i class="fab fa-cc-discover"></i>
+      <i class="fab fa-cc-amex"></i>
+    </div>
+  </div>
+
+</footer>
+
+<!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
+
+<!--<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>-->
+
+<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>-->
+
+<script src="{% static 'js/cart.js' %}"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>

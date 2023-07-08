@@ -1,0 +1,10 @@
+Front end I don't use templates.  I use Bootstrap and other components and customize it myself for my ideas.  Front End - Html Bootstrap Css Js.  In the background I use Python Django.Django MVT architecture and libraries
+
+Developed an innovative perfume-based eCommerce website using HTML, CSS, and Bootstrap.
+Implemented custom design elements and utilized Bootstrap components to create an intuitive and visually appealing user interface.
+Leveraged JavaScript and jQuery to enhance interactivity and provide seamless user experiences.
+Utilized Python and Django framework to handle backend functionality and data management.
+Integrated Django libraries and modules to manage user authentication, product catalog, and shopping cart functionality.
+Implemented payment gateway integration using popular platforms like PayPal to enable secure and convenient transactions.
+Utilized database management techniques to store and retrieve product information, user data, and order details.
+Employed responsive design principles to ensure optimal user experience across various devices and screen sizes.
